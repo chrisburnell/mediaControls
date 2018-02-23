@@ -19,155 +19,132 @@
         let muted = false;
         let playbackRate;
         let keyCode;
-
-        function addEventListenerMultiple(element, events, listener) {
-            events.split(' ').forEach(event => element.addEventListener(event, listener, false));
-        }
+        let keyData;
 
         for (let audioElement of audioElements) {
-            addEventListenerMultiple(audioElement, 'focus play pause seeking seeked volumechange', () => {
-                audio = audioElement;
-            });
+            ['focus', 'play', 'pause', 'seeking', 'seeked', 'volumechange'].reduce(event => {
+                audioElement.addEventListener(event, () => {
+                    audio = audioElement;
+                });
+            }, false);
         }
 
         const keys = {
-            32:     'play-pause',       // Spacebar
-            75:     'play-pause',       // K
-            37:     'rewind-5',         // Left Arrow
-            39:     'forward-5',        // Right Arrow
-            74:     'rewind-10',        // J
-            76:     'forward-10',       // L
-            38:     'volume-up',        // Up Arrow
-            40:     'volume-down',      // Down Arrow
-            77:     'mute-unmute',      // M
-            68:     'speed-up',         // D
-            187:    'speed-up',         // = / +
-            65:     'speed-down',       // A
-            189:    'speed-down',       // - / _
-            83:     'speed-default'     // S
+            32: {
+                physicalKey: 'spacebar',
+                action: 'play-pause'
+            },
+            75: {
+                physicalKey: 'k',
+                action: 'play-pause'
+            },
+            37: {
+                physicalKey: '◀',
+                action: 'rewind-5'
+            },
+            39: {
+                physicalKey: '▶',
+                action: 'forward-5'
+            },
+            74: {
+                physicalKey: 'j',
+                action: 'rewind-10'
+            },
+            76: {
+                physicalKey: 'l',
+                action: 'forward-10'
+            },
+            34: {
+                physicalKey: 'pagedown',
+                action: 'rewind-30'
+            },
+            33: {
+                physicalKey: 'pageup',
+                action: 'forward-30'
+            },
+            38: {
+                physicalKey: '▲',
+                action: 'volume-up'
+            },
+            40: {
+                physicalKey: '▼',
+                action: 'volume-down'
+            },
+            77: {
+                physicalKey: 'm',
+                action: 'mute-unmute'
+            },
+            68: {
+                physicalKey: 'd',
+                action: 'speed-up'
+            },
+            187: {
+                physicalKey: '=',
+                action: 'speed-up'
+            },
+            65: {
+                physicalKey: 'a',
+                action: 'speed-down'
+            },
+            189: {
+                physicalKey: '-',
+                action: 'speed-down'
+            },
+            83: {
+                physicalKey: 's',
+                action: 'speed-default'
+            },
+            36: {
+                physicalKey: 'home',
+                action: 'start'
+            },
+            35: {
+                physicalKey: 'end',
+                action: 'end'
+            }
+        }
+        // 0–9
+        const numberKeys = Array(57 - 48 + 1).fill().map((_, index) => 48 + index);
+        for (let numberKey in numberKeys) {
+            keys[numberKeys[numberKey]] = { physicalKey: `${numberKey}`, action: 'seek' };
+        }
+        // Num0–Num9
+        const numpadKeys = Array(105 - 96 + 1).fill().map((_, index) => 96 + index);
+        for (let numpadKey in numpadKeys) {
+            keys[numpadKeys[numpadKey]] = { physicalKey: `${numpadKey}`, action: 'seek' };
         }
 
         const actions = {
-            'play-pause': {
-                name: ['Play / Pause'],
-                keys: ['Spacebar', 'K'],
-                action: () => { audio.paused ? audio.play() : audio.pause() }
-            },
-            'rewind-5': {
-                name: ['Rewind 5s'],
-                keys: ['◀'],
-                action: () => { audio.currentTime = currentTime < 5 ? 0 : currentTime - 5 }
-            },
-            'forward-5': {
-                name: ['Forward 5s'],
-                keys: ['▶'],
-                action: () => { audio.currentTime = duration - currentTime < 5 ? duration : currentTime + 5 }
-            },
-            'rewind-10': {
-                name: ['Rewind 10s'],
-                keys: ['J'],
-                action: () => { audio.currentTime = currentTime < 10 ? 0 : currentTime - 10 }
-            },
-            'forward-10': {
-                name: ['Forward 10s'],
-                keys: ['L'],
-                action: () => { audio.currentTime = duration - currentTime < 10 ? duration : currentTime + 10 }
-            },
-            'volume-down': {
-                name: ['Volume Up 10%'],
-                keys: ['▼'],
-                action: () => { audio.volume = volume == 0 ? 0 : volume - 0.1 }
-            },
-            'volume-up': {
-                name: ['Volume Down 10%'],
-                keys: ['▲'],
-                action: () => { audio.volume = volume == 1 ? 1 : volume + 0.1 }
-            },
-            'mute-unmute': {
-                name: ['Mute / Unmute'],
-                keys: ['M'],
-                action: () => { audio.muted = !audio.muted }
-            },
-            'speed-down': {
-                name: ['Playback Rate Down 25%'],
-                keys: ['A', '-', '_'],
-                action: () => { audio.playbackRate = playbackRate == 0.25 ? 0.25 : playbackRate - 0.25 }
-            },
-            'speed-up': {
-                name: ['Playback Rate Up 25%'],
-                keys: ['D', '=', '+'],
-                action: () => { audio.playbackRate = playbackRate == 2 ? 2 : playbackRate + 0.25 }
-            },
-            'speed-default': {
-                name: ['Playback Rate Set to 100%'],
-                keys: ['S'],
-                action: () => { audio.playbackRate = 1 }
-            },
-            'seek-0': {
-                name: ['Seek to Start'],
-                keys: ['0'],
-                action: () => { audio.currentTime = 0 }
-            },
-            'seek-1': {
-                name: ['Seek to 10%'],
-                keys: ['1'],
-                action: () => { audio.currentTime = 0.1 }
-            },
-            'seek-2': {
-                name: ['Seek to 20%'],
-                keys: ['2'],
-                action: () => { audio.currentTime = 0.2 }
-            },
-            'seek-3': {
-                name: ['Seek to 30%'],
-                keys: ['3'],
-                action: () => { audio.currentTime = 0.3 }
-            },
-            'seek-4': {
-                name: ['Seek to 40%'],
-                keys: ['4'],
-                action: () => { audio.currentTime = 0.4 }
-            },
-            'seek-5': {
-                name: ['Seek to 50%'],
-                keys: ['5'],
-                action: () => { audio.currentTime = 0.5 }
-            },
-            'seek-6': {
-                name: ['Seek to 60%'],
-                keys: ['6'],
-                action: () => { audio.currentTime = 0.6 }
-            },
-            'seek-7': {
-                name: ['Seek to 70%'],
-                keys: ['7'],
-                action: () => { audio.currentTime = 0.7 }
-            },
-            'seek-8': {
-                name: ['Seek to 80%'],
-                keys: ['8'],
-                action: () => { audio.currentTime = 0.8 }
-            },
-            'seek-9': {
-                name: ['Seek to 90%'],
-                keys: ['9'],
-                action: () => { audio.currentTime = 0.9 }
-            }
+            'play-pause':    () => { audio.paused ? audio.play() : audio.pause() },
+            'rewind-5':      () => { audio.currentTime = currentTime < 5 ? 0 : currentTime - 5 },
+            'forward-5':     () => { audio.currentTime = duration - currentTime < 5 ? duration : currentTime + 5 },
+            'rewind-10':     () => { audio.currentTime = currentTime < 10 ? 0 : currentTime - 10 },
+            'forward-10':    () => { audio.currentTime = duration - currentTime < 10 ? duration : currentTime + 10 },
+            'rewind-30':     () => { audio.currentTime = currentTime < 30 ? 0 : currentTime - 30 },
+            'forward-30':    () => { audio.currentTime = duration - currentTime < 30 ? duration : currentTime + 30 },
+            'volume-down':   () => { audio.volume = volume == 0 ? 0 : volume - 0.05 },
+            'volume-up':     () => { audio.volume = volume == 1 ? 1 : volume + 0.05 },
+            'mute-unmute':   () => { audio.muted = !audio.muted },
+            'speed-down':    () => { audio.playbackRate = playbackRate == 0.25 ? 0.25 : playbackRate - 0.25 },
+            'speed-up':      () => { audio.playbackRate = playbackRate == 2 ? 2 : playbackRate + 0.25 },
+            'speed-default': () => { audio.playbackRate = 1 },
+            'start':         () => { audio.currentTime = 0 },
+            'end':           () => { audio.currentTime = duration },
+            'seek':          key => { audio.currentTime = parseInt(key) / 10 * duration }
         };
 
-        window.addEventListener('keydown', (event) => {
+        window.addEventListener('keydown', event => {
             keyCode = event.keyCode ? event.keyCode : event.which;
             currentTime = audio.currentTime;
             duration = audio.duration;
             volume = muted ? volume : audio.volume;
             playbackRate = audio.playbackRate;
+            keyData = Object.keys(keys).filter(key => key == keyCode).reduce((_, key) => keys[key], undefined);
 
-            for (const [key, action] of Object.entries(keys)) {
-                if (key == keyCode) {
-                    event.stopPropagation();
-                    event.preventDefault();
-                    actions[action].action();
-                }
+            if (keyData !== undefined) {
+                event.stopPropagation();
+                event.preventDefault();
+                actions[keyData.action](keyData.physicalKey);
             }
         });
     }
