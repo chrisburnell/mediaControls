@@ -1,5 +1,5 @@
 title:       Audio Controls
-lede:        'A simple piece of JavaScript to add YouTube-like keyboard controls to <audio> elements on any page.'
+lede:        'A simple piece of JavaScript to add YouTube-like keyboard controls to audio elements on any page.'
 version:     1.1.0
 color:       5f8aa6
 
