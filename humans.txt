@@ -1,0 +1,17 @@
+---
+---
+
+# humanstxt.org
+
+/* OWNER & DEVELOPER */
+
+    Name: {{ site.author.name }}
+    URL: {{ site.author.url }}
+
+/* SITE */
+
+    Last updated:  {{ 'now' | date: '%F' }}
+    URL:           {{ site.url }}
+    Language:      {{ site.language }}
+    Doctype:       HTML5
+    Compiled with: Jekyll, Gulp

@@ -1,0 +1,6 @@
+{
+    "presets": [["minify", {
+        "evaluate": false,
+        "mangle": false
+    }]]
+}

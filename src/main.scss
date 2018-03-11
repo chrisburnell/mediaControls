@@ -1,0 +1,172 @@
+/*!
+ * Audio Controls
+ * YouTube-like Keyboard Controls for HTML Audio
+ * @author Chris Burnell <me@chrisburnell.com>
+ * @version 1.1.0
+ */
+
+
+$color-alpha: #D37268;
+$color-beta: #5F9EA0;
+$color-gamma: #6897D3;
+$color-delta: #0B203A;
+$color-epsilon: #AC9791;
+$measure: 1.5rem;
+
+
+html {
+    box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    background-color: $color-beta;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+    font-size: 18px;
+}
+
+h1 {
+    color: $color-delta;
+    font-size: 2.5rem;
+    padding: #{$measure * 2};
+    margin: 0;
+    text-shadow: 2px 2px 0 rgba(black, 0.25);
+}
+
+p {
+    margin: 0 0 $measure;
+}
+
+.container {
+    display: flex;
+
+    @media (max-width: 800px) {
+        flex-direction: column;
+    }
+
+    @media (min-width: 801px) {
+        flex-direction: row;
+    }
+
+    & > div {
+        flex: 0 1 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: $measure;
+
+        @media (max-width: 800px) {
+
+        }
+
+        @media (min-width: 801px) {
+            max-width: 45vw;
+        }
+    }
+}
+
+audio {
+    width: 24rem;
+    min-width: 100%;
+    max-width: 100%;
+    margin-bottom: #{$measure * 3};
+
+    &::-webkit-media-controls-panel {
+        padding: 2em;
+        margin: 0 -2em;
+    }
+
+    &::-webkit-media-controls-play-button {
+        border-color: red;
+    }
+
+    &::-webkit-slider-thumb {
+        color: red;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    display: inline-block;
+    padding: 0 0 #{$measure / 2};
+    font-weight: 600;
+
+    &[for="autoplay"] {
+        align-self: flex-start;
+    }
+}
+
+input {
+    border: 4px solid rgba(black, 0.5);
+
+    &[type="url"] {
+        width: 24rem;
+        min-width: 100%;
+        max-width: 100%;
+        padding: #{$measure / 2};
+        margin: 0 0 #{$measure / 2};
+        font-family: inherit;
+        font-size: 1rem;
+    }
+
+    &[type="checkbox"] {
+        appearance: none;
+        background-color: white;
+        width:  #{$measure * 1.5};
+        height: #{$measure * 1.5};
+        vertical-align: middle;
+        cursor: pointer;
+
+        &:checked {
+            background-color: lime;
+        }
+    }
+}
+
+button {
+    background-color: $color-alpha;
+    color: white;
+    padding: #{$measure / 2};
+    border: 4px solid rgba(black, 0.5);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+dl {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: $measure auto;
+    font-size: 0.888rem;
+}
+dt,
+dd {
+    flex: 0 1 50%;
+    padding: #{$measure / 2};
+
+    &:not(:first-of-type) {
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+}
+dd {
+    margin-left: 0;
+    text-align: right;
+}
