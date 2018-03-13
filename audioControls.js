@@ -31,11 +31,13 @@
             });
         }
 
+        function key(physicalKey, action) {
+            this.physicalKey = physicalKey;
+            this.action = action;
+        }
+
         const keys = {
-            32: {
-                physicalKey: 'spacebar',
-                action: 'play-pause'
-            },
+            32: new key('spacebar', 'play-pause'),
             75: {
                 physicalKey: 'k',
                 action: 'play-pause'
