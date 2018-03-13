@@ -100,9 +100,9 @@ layout: null
                 <dt>Forward 10s</dt>
                 <dd>L</dd>
                 <dt>Forward 30s</dt>
-                <dd>pageup</dd>
+                <dd>Page Up</dd>
                 <dt>Rewind 30s</dt>
-                <dd>pagedown</dd>
+                <dd>Page Down</dd>
                 <dt>Seek</dt>
                 <dd>0–9</dd>
                 <dt>Volume Up 5%</dt>
