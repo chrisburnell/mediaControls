@@ -59,12 +59,12 @@
         // 0–9
         const numberKeys = Array(10).fill().map((_, index) => 48 + index);
         for (let numberKey in numberKeys) {
-            keys[numberKeys[numberKey]] = new keyMap(`${numberKey}`, 'seek');
+            keys[numberKeys[numberKey]] = new keyMap(numberKey, 'seek');
         }
         // Num0–Num9
         const numpadKeys = Array(10).fill().map((_, index) => 96 + index);
         for (let numpadKey in numpadKeys) {
-            keys[numpadKeys[numpadKey]] = new keyMap(`${numpadKey}`, 'seek');
+            keys[numpadKeys[numpadKey]] = new keyMap(numpadKey, 'seek');
         }
 
         const actions = {
