@@ -71,12 +71,10 @@ layout: null
     <section class="container">
         <div>
             <?php
-                $url = isset($_GET['url']) ? $_GET['url'] : isset($_POST['url']) ? $_POST['url'] : '';
-                $autoplay = isset($_GET['autoplay']) || isset($_POST['autoplay']) ? ' autoplay' : '';
-                $autoplayChecked = isset($_GET['autoplay']) || isset($_POST['autoplay']) ? ' checked' : '';
-                if (isset($_GET['url']) || isset($_POST['url'])) {
-                    echo '<audio src="' . $url . '" preload controls' . $autoplay . '></audio>';
-                }
+                $url = isset($_GET['url']) ? $_GET['url'] : '';
+                $autoplay = isset($_GET['autoplay']) ? ' autoplay' : '';
+                $autoplayChecked = !empty($autoplay) ? ' checked' : '';
+                echo '<audio src="' . $url . '" preload controls' . $autoplay . '></audio>';
                 echo '<form action="/" method="post">';
                 echo '<label for="url">URL:</label>';
                 echo '<input type="url" placeholder="Paste the URL here!" name="url" id="url" value="' . $url . '" required />';
@@ -122,12 +120,6 @@ layout: null
     </section>
 
     <script src="audioControls.min.js"></script>
-
-    <script type="text/javascript">
-        // if (navigator.serviceWorker && !navigator.serviceWorker.controller) {
-        //     navigator.serviceWorker.register('/serviceworker.js');
-        // }
-    </script>
 
 </body>
 </html>
