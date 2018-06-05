@@ -87,7 +87,7 @@
         };
 
         window.addEventListener('keydown', event => {
-            if (event.metaKey || event.ctrlKey || event.shiftKey) {
+            if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey) {
                 return;
             }
 
