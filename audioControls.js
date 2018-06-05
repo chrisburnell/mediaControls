@@ -83,10 +83,14 @@
             'speed-default': () => { audio.playbackRate = 1 },
             'start':         () => { audio.currentTime = 0 },
             'end':           () => { audio.currentTime = duration },
-            'seek':          key => { audio.currentTime = parseInt(key) / 10 * duration }
+            'seek':          (key) => { audio.currentTime = parseInt(key) / 10 * duration }
         };
 
         window.addEventListener('keydown', event => {
+            if (event.metaKey || event.ctrlKey || event.shiftKey) {
+                return;
+            }
+
             keyCode = event.keyCode ? event.keyCode : event.which;
             currentTime = audio.currentTime;
             duration = audio.duration;
