@@ -1,7 +1,7 @@
 # Media Controls
 
 
-![Version](https://img.shields.io/badge/version-1.1.0-blue.svg?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.1.2-blue.svg?style=flat-square)
 [![License](https://img.shields.io/badge/license-GNU_GPLv3-blue.svg?style=flat-square)](LICENSE)
 
 [![Build Status](https://semaphoreci.com/api/v1/chrisburnell/mediacontrols/branches/master/badge.svg)](https://semaphoreci.com/chrisburnell/audiocontrols)
