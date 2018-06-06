@@ -76,11 +76,16 @@ p {
     }
 }
 
+.no-verification,
 audio,
 video {
     width: 24rem;
     min-width: 100%;
     max-width: 100%;
+}
+
+audio,
+video {
     margin-bottom: #{$measure * 3};
 }
 

@@ -71,18 +71,24 @@ layout: null
     <section class="container">
         <div>
             <?php
-                $url = isset($_GET['url']) ? $_GET['url'] : isset($_POST['url']) ? $_POST['url'] : '';
-                $ch = curl_init($url);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_exec($ch);
-                $mimeType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-                $autoplay = isset($_GET['autoplay']) ? ' autoplay' : isset($_POST['autoplay']) ? ' autoplay' : '';
-                $autoplayChecked = !empty($autoplay) ? ' checked' : '';
-                if (strpos($mimeType, 'audio') !== false) {
-                    echo '<audio src="' . $url . '" preload controls' . $autoplay . '></audio>';
-                }
-                else if (strpos($mimeType, 'video') !== false) {
-                    echo '<video src="' . $url . '" preload controls' . $autoplay . '></video>';
+                $url = isset($_GET['url']) ? $_GET['url'] : null;
+                if (isset($url)) {
+                    $ch = curl_init($url);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_exec($ch);
+                    $mimeType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+                    $autoplay = isset($_GET['autoplay']) ? ' autoplay' : null;
+                    $autoplayChecked = isset($autoplay) ? ' checked' : '';
+                    if (strpos($mimeType, 'video') !== false) {
+                        echo '<video src="' . $url . '" preload controls' . $autoplay . '></video>';
+                    }
+                    else if (strpos($mimeType, 'audio') !== false) {
+                        echo '<audio src="' . $url . '" preload controls' . $autoplay . '></audio>';
+                    }
+                    else {
+                        echo '<p class="no-verification">Unfortunately, we were unable to verify whether your URL is an audio or video file, so we have assumed it is an audio file!</p>';
+                        echo '<audio src="' . $url . '" preload controls' . $autoplay . '></audio>';
+                    }
                 }
                 echo '<form action="/" method="get">';
                 echo '<label for="url">URL:</label>';
