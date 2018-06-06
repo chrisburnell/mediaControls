@@ -76,7 +76,7 @@ layout: null
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_exec($ch);
                 $mimeType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-                $autoplay = isset($_GET['autoplay']) ? ' autoplay' : isset($_POST['autoplay']) ? 'autoplay' : '';
+                $autoplay = isset($_GET['autoplay']) ? ' autoplay' : isset($_POST['autoplay']) ? ' autoplay' : '';
                 $autoplayChecked = !empty($autoplay) ? ' checked' : '';
                 if (strpos($mimeType, 'audio') !== false) {
                     echo '<audio src="' . $url . '" preload controls' . $autoplay . '></audio>';
