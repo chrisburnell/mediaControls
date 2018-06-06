@@ -76,24 +76,17 @@ p {
     }
 }
 
-audio {
+audio,
+video {
     width: 24rem;
     min-width: 100%;
     max-width: 100%;
     margin-bottom: #{$measure * 3};
+}
 
-    &::-webkit-media-controls-panel {
-        padding: 2em;
-        margin: 0 -2em;
-    }
-
-    &::-webkit-media-controls-play-button {
-        border-color: red;
-    }
-
-    &::-webkit-slider-thumb {
-        color: red;
-    }
+audio::-webkit-media-controls-panel {
+    padding: 2em;
+    margin: 0 -2em;
 }
 
 form {

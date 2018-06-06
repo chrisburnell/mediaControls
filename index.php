@@ -72,9 +72,18 @@ layout: null
         <div>
             <?php
                 $url = isset($_GET['url']) ? $_GET['url'] : '';
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_exec($ch);
+                $mimeType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
                 $autoplay = isset($_GET['autoplay']) ? ' autoplay' : '';
                 $autoplayChecked = !empty($autoplay) ? ' checked' : '';
-                echo '<audio src="' . $url . '" preload controls' . $autoplay . '></audio>';
+                if (strpos($mimeType, 'audio') !== false) {
+                    echo '<audio src="' . $url . '" preload controls' . $autoplay . '></audio>';
+                }
+                else if (strpos($mimeType, 'video') !== false) {
+                    echo '<video src="' . $url . '" preload controls' . $autoplay . '></video>';
+                }
                 echo '<form action="/" method="post">';
                 echo '<label for="url">URL:</label>';
                 echo '<input type="url" placeholder="Paste the URL here!" name="url" id="url" value="' . $url . '" required />';
