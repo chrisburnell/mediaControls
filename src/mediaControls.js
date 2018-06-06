@@ -53,18 +53,23 @@
             65:  new keyMap('a',        'speed-down'),
             189: new keyMap('-',        'speed-down'),
             83:  new keyMap('s',        'speed-default'),
+            48:  new keyMap('0',        'speed-default'),
             36:  new keyMap('home',     'start'),
             35:  new keyMap('end',      'end')
         }
-        // 0–9
-        const numberKeys = Array(10).fill().map((_, index) => 48 + index);
+        // 1–9
+        const numberKeys = Array(9).fill().map((_, index) => 49 + index);
         for (let numberKey in numberKeys) {
             keys[numberKeys[numberKey]] = new keyMap(numberKey, 'seek');
         }
-        // Num0–Num9
-        const numpadKeys = Array(10).fill().map((_, index) => 96 + index);
+        // Num1–Num9
+        const numpadKeys = Array(9).fill().map((_, index) => 97 + index);
         for (let numpadKey in numpadKeys) {
             keys[numpadKeys[numpadKey]] = new keyMap(numpadKey, 'seek');
+        }
+
+        function rangeMap(value, oldMinimum, oldMaximum, newMinimum, newMaximum) {
+            return newMinimum + (newMaximum - newMinimum) * (value - oldMinimum) / (oldMaximum - oldMinimum);
         }
 
         const actions = {
@@ -83,7 +88,7 @@
             'speed-default': () => { media.playbackRate = 1 },
             'start':         () => { media.currentTime = 0 },
             'end':           () => { media.currentTime = duration },
-            'seek':          (key) => { media.currentTime = parseInt(key) / 10 * duration }
+            'seek':          (key) => { media.currentTime = rangeMap(parseInt(key), 0, 8, 0, duration) }
         };
 
         window.addEventListener('keydown', event => {

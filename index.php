@@ -85,7 +85,7 @@ layout: null
             ?>
         </div>
         <div>
-            <p>Drag the <a href="javascript:{% include mediaControls.min.js %}" title="Media Controls">Bookmarklet</a> to your bookmarks bar or check this out on <a href="https://github.com/chrisburnell/mediaControls" rel="external">GitHub</a>.</p>
+            <p>Drag the <a href="javascript:{% include mediaControls.min.js %}" title="Media Controls Bookmarklet">Media Controls</a> bookmarklet to your bookmarks bar or check this out on <a href="https://github.com/chrisburnell/mediaControls" rel="external">GitHub</a>.</p>
             <dl class="audio-controls-legend">
                 <dt>Play / Pause</dt>
                 <dd>Spacebar / K</dd>
@@ -102,7 +102,7 @@ layout: null
                 <dt>Rewind 30s</dt>
                 <dd>Page Down</dd>
                 <dt>Seek</dt>
-                <dd>0–9</dd>
+                <dd>1–9</dd>
                 <dt>Volume Up 5%</dt>
                 <dd>▲</dd>
                 <dt>Volume Down 5%</dt>
@@ -114,7 +114,7 @@ layout: null
                 <dt>Playback Rate Up 25%</dt>
                 <dd>D / =</dd>
                 <dt>Playback Rate Set to 100%</dt>
-                <dd>S</dd>
+                <dd>S / 0</dd>
             </dl>
         </div>
     </section>
