@@ -1,7 +1,7 @@
 /**
- * Audio Controls Gulp Config
+ * Media Controls Gulp Config
  * @author Chris Burnell
- * @version 1.1.0
+ * @version 1.1.2
  */
 
 
@@ -62,7 +62,7 @@ gulp.task('css-main', () => {
 
 // Lint JavaScript
 gulp.task('js-lint', ['js-transport'], () => {
-    return gulp.src([`${paths.includes}/audioControls.min.js`])
+    return gulp.src([`${paths.includes}/mediaControls.min.js`])
         .pipe(plumber())
         .pipe(eslint({
             fix: true
@@ -73,7 +73,7 @@ gulp.task('js-lint', ['js-transport'], () => {
 
 // Transport JavaScript
 gulp.task('js-transport', () => {
-    return gulp.src([`${paths.src}/audioControls.js`])
+    return gulp.src([`${paths.src}/mediaControls.js`])
         .pipe(plumber())
         .pipe(gulp.dest(`${paths.root}/`))
         .pipe(babel())

@@ -1,5 +1,5 @@
 {
-  "name": "AudioControls",
+  "name": "MediaControls",
   "author": "Chris Burnell <me@chrisburnell.com>",
   "contributors": [
     {
@@ -9,8 +9,8 @@
       "twitter": "@iamchrisburnell"
     }
   ],
-  "version": "1.1.0",
-  "description": "A simple piece of JavaScript to add YouTube-like keyboard controls to <audio> elements on any page.",
+  "version": "1.1.2",
+  "description": "A simple piece of JavaScript to add YouTube-like keyboard controls to <audio> and <video> elements on any page.",
   "license": "GPL-3.0",
   "main": "gulpfile.babel.js",
   "private": true,
@@ -36,9 +36,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:chrisburnell/audioControls.git"
+    "url": "git@github.com:chrisburnell/mediaControls.git"
   },
   "bugs": {
-    "url": "https://github.com/chrisburnell/audioControls/issues"
+    "url": "https://github.com/chrisburnell/mediaControls/issues"
   }
 }

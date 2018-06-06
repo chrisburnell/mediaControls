@@ -1,8 +1,8 @@
 /*!
- * Audio Controls
- * YouTube-like Keyboard Controls for HTML Audio
+ * Media Controls
+ * YouTube-like Keyboard Controls for HTML Audio and Video
  * @author Chris Burnell <me@chrisburnell.com>
- * @version 1.1.1
+ * @version 1.1.2
  */
 
 
@@ -11,10 +11,10 @@
     'use strict';
 
 
-    const audioElements = document.querySelectorAll('audio');
+    const mediaElements = document.querySelectorAll('audio, video');
 
-    if (!!audioElements.length) {
-        let audio = audioElements[0] ? audioElements[0] : undefined;
+    if (!!mediaElements.length) {
+        let media = mediaElements[0] ? mediaElements[0] : undefined;
         let currentTime;
         let duration;
         let volume;
@@ -23,10 +23,10 @@
         let keyCode;
         let keyData;
 
-        for (let audioElement of audioElements) {
+        for (let mediaElement of mediaElements) {
             ['focus', 'play', 'pause', 'seeking', 'seeked', 'volumechange'].forEach(event => {
-                audioElement.addEventListener(event, () => {
-                    audio = audioElement;
+                mediaElement.addEventListener(event, () => {
+                    media = mediaElement;
                 });
             });
         }
@@ -68,22 +68,22 @@
         }
 
         const actions = {
-            'play-pause':    () => { audio.paused ? audio.play() : audio.pause() },
-            'rewind-5':      () => { audio.currentTime = currentTime < 5 ? 0 : currentTime - 5 },
-            'forward-5':     () => { audio.currentTime = duration - currentTime < 5 ? duration : currentTime + 5 },
-            'rewind-10':     () => { audio.currentTime = currentTime < 10 ? 0 : currentTime - 10 },
-            'forward-10':    () => { audio.currentTime = duration - currentTime < 10 ? duration : currentTime + 10 },
-            'rewind-30':     () => { audio.currentTime = currentTime < 30 ? 0 : currentTime - 30 },
-            'forward-30':    () => { audio.currentTime = duration - currentTime < 30 ? duration : currentTime + 30 },
-            'volume-down':   () => { audio.volume = volume <= 0.05 ? 0 : +(volume - 0.05).toFixed(2) },
-            'volume-up':     () => { audio.volume = volume >= 0.95 ? 1 : +(volume + 0.05).toFixed(2) },
-            'mute-unmute':   () => { audio.muted = !audio.muted },
-            'speed-down':    () => { audio.playbackRate = playbackRate == 0.25 ? 0.25 : +(playbackRate - 0.25).toFixed(2) },
-            'speed-up':      () => { audio.playbackRate = playbackRate == 2 ? 2 : +(playbackRate + 0.25).toFixed(2) },
-            'speed-default': () => { audio.playbackRate = 1 },
-            'start':         () => { audio.currentTime = 0 },
-            'end':           () => { audio.currentTime = duration },
-            'seek':          (key) => { audio.currentTime = parseInt(key) / 10 * duration }
+            'play-pause':    () => { media.paused ? media.play() : media.pause() },
+            'rewind-5':      () => { media.currentTime = currentTime < 5 ? 0 : currentTime - 5 },
+            'forward-5':     () => { media.currentTime = duration - currentTime < 5 ? duration : currentTime + 5 },
+            'rewind-10':     () => { media.currentTime = currentTime < 10 ? 0 : currentTime - 10 },
+            'forward-10':    () => { media.currentTime = duration - currentTime < 10 ? duration : currentTime + 10 },
+            'rewind-30':     () => { media.currentTime = currentTime < 30 ? 0 : currentTime - 30 },
+            'forward-30':    () => { media.currentTime = duration - currentTime < 30 ? duration : currentTime + 30 },
+            'volume-down':   () => { media.volume = volume <= 0.05 ? 0 : +(volume - 0.05).toFixed(2) },
+            'volume-up':     () => { media.volume = volume >= 0.95 ? 1 : +(volume + 0.05).toFixed(2) },
+            'mute-unmute':   () => { media.muted = !media.muted },
+            'speed-down':    () => { media.playbackRate = playbackRate == 0.25 ? 0.25 : +(playbackRate - 0.25).toFixed(2) },
+            'speed-up':      () => { media.playbackRate = playbackRate == 2 ? 2 : +(playbackRate + 0.25).toFixed(2) },
+            'speed-default': () => { media.playbackRate = 1 },
+            'start':         () => { media.currentTime = 0 },
+            'end':           () => { media.currentTime = duration },
+            'seek':          (key) => { media.currentTime = parseInt(key) / 10 * duration }
         };
 
         window.addEventListener('keydown', event => {
@@ -92,10 +92,10 @@
             }
 
             keyCode = event.keyCode ? event.keyCode : event.which;
-            currentTime = audio.currentTime;
-            duration = audio.duration;
-            volume = muted ? volume : audio.volume;
-            playbackRate = audio.playbackRate;
+            currentTime = media.currentTime;
+            duration = media.duration;
+            volume = muted ? volume : media.volume;
+            playbackRate = media.playbackRate;
             keyData = Object.keys(keys).filter(key => key == keyCode).reduce((_, key) => keys[key], undefined);
 
             if (keyData !== undefined) {

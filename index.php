@@ -9,7 +9,7 @@ layout: null
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
-    <title>Audio Player</title>
+    <title>Media Player</title>
 
     <link rel="mask-icon" href="{{ '/favicon.svg' | prepend: site.url }}" color="#{{ site.color }}">
 
@@ -85,7 +85,7 @@ layout: null
             ?>
         </div>
         <div>
-            <p>Drag the <a href="javascript:{% include audioControls.min.js %}" title="Audio Controls">Bookmarklet</a> to your bookmarks bar or check this out on <a href="https://github.com/chrisburnell/audioControls" rel="external">GitHub</a>.</p>
+            <p>Drag the <a href="javascript:{% include mediaControls.min.js %}" title="Media Controls">Bookmarklet</a> to your bookmarks bar or check this out on <a href="https://github.com/chrisburnell/mediaControls" rel="external">GitHub</a>.</p>
             <dl class="audio-controls-legend">
                 <dt>Play / Pause</dt>
                 <dd>Spacebar / K</dd>
@@ -119,7 +119,7 @@ layout: null
         </div>
     </section>
 
-    <script src="audioControls.min.js"></script>
+    <script src="mediaControls.min.js"></script>
 
 </body>
 </html>
