@@ -78,7 +78,6 @@ layout: null
                     curl_exec($ch);
                     $mimeType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
                     $autoplay = isset($_GET['autoplay']) ? ' autoplay' : null;
-                    $autoplayChecked = isset($autoplay) ? ' checked' : '';
                     if (strpos($mimeType, 'video') !== false) {
                         echo '<video src="' . $url . '" preload controls' . $autoplay . '></video>';
                     }
@@ -93,7 +92,7 @@ layout: null
                 echo '<form action="/" method="get">';
                 echo '<label for="url">URL:</label>';
                 echo '<input type="url" placeholder="Paste the URL here!" name="url" id="url" value="' . $url . '" required />';
-                echo '<label for="autoplay">Autoplay? <input type="checkbox" name="autoplay" id="autoplay" ' . $autoplayChecked . '/></label>';
+                echo '<label for="autoplay">Autoplay? <input type="checkbox" name="autoplay" id="autoplay" ' . (isset($autoplay) ? ' checked' : '') . '/></label>';
                 echo '<br>';
                 echo '<button type="submit">Submit</button>';
                 echo '</form>';
