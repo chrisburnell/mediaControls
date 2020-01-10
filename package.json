@@ -15,24 +15,35 @@
   "main": "gulpfile.babel.js",
   "private": true,
   "engines": {
-    "node": ">= 5.10.0"
+    "node": "~11"
+  },
+  "scripts": {
+    "build": "gulp && bundle exec jekyll build --drafts;",
+    "serve": "sleep 1 && open 'http://localhost:9001/' & gulp watch & bundle exec jekyll serve --drafts --incremental --livereload & php -S localhost:9001 -t _site/;",
+    "css": "gulp css",
+    "js": "gulp js"
   },
   "dependencies": {
-    "autoprefixer": "8.1.0",
-    "babel-core": "6.26.0",
-    "babel-preset-minify": "0.3.0",
-    "cssnano": "3.10.0",
-    "gulp": "3.9.1",
-    "gulp-babel": "7.0.1",
-    "gulp-eslint": "4.0.2",
+    "@babel/core": "7.7.7",
+    "@babel/preset-env": "7.7.7",
+    "@bdchauvette/gulp-prettier": "2.0.0",
+    "autoprefixer": "9.7.3",
+    "babel-core": "6.26.3",
+    "babel-preset-minify": "0.5.1",
+    "gulp": "4.0.2",
+    "gulp-babel": "8.0.0",
+    "gulp-concat": "2.6.1",
+    "gulp-csso": "4.0.1",
     "gulp-newer": "1.4.0",
-    "gulp-plumber": "1.2.0",
-    "gulp-postcss": "7.0.1",
-    "gulp-rename": "1.2.2",
-    "gulp-sass": "3.1.0",
-    "gulp-watch": "5.0.0",
-    "postcss-reporter": "5.0.0",
-    "postcss-scss": "1.0.4"
+    "gulp-plumber": "1.2.1",
+    "gulp-postcss": "8.0.0",
+    "gulp-rename": "2.0.0",
+    "gulp-sass": "4.0.2",
+    "gulp-watch": "5.0.1",
+    "prettier": "1.19.1"
+  },
+  "devDependencies": {
+    "gulp-cli": "2.2.0"
   },
   "repository": {
     "type": "git",
