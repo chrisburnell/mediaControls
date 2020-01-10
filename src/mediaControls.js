@@ -110,4 +110,11 @@
             }
         });
     }
+
+    if ("mediaSession" in navigator) {
+        navigator.mediaSession.setActionHandler("play", actions["play-pause"]);
+        navigator.mediaSession.setActionHandler("pause", actions["play-pause"]);
+        navigator.mediaSession.setActionHandler("seekbackward", actions["rewind-30"]);
+        navigator.mediaSession.setActionHandler("seekforward", actions["forward-30"]);
+    }
 })();

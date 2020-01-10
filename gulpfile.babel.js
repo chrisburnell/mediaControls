@@ -112,7 +112,7 @@ gulp.task("js-concat", () => {
             `${paths.js.src}/**/*.js`
         ])
         .pipe(plumber())
-        .pipe(concat("main.js"))
+        .pipe(concat("mediaControls.js"))
         .pipe(gulp.dest(`${paths.js.dest}/`))
         .pipe(babel())
         .pipe(
